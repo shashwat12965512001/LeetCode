@@ -65,17 +65,13 @@ class Solution {
 		Stack<Integer> s = new Stack<>();
 		temp = head;
 		int size = (n % 2) == 0 ? n : (n-1);
-		System.out.println("n: "+n+" | size: "+size);
 		ListNode root = null;
 		for (int i = 0; i < size; i++) {
-			System.out.print("(i % 2): "+(i % 2)+" | ");
 			if (i > 0 && (i % 2) == 0) {
-				System.out.print("if | ");
 				while (!s.empty()) {
 					root = insertAtLast(root, s.pop());
 				}
 			}
-			System.out.println("i: "+i+" | temp.val: "+ temp.val);
 			s.push(temp.val);
 			temp = temp.next;
 		}
