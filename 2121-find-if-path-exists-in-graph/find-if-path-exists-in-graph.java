@@ -23,20 +23,6 @@ class Solution {
         return graph;
     }
 
-    public static boolean hasPath(ArrayList<Edge>[] graph, int src, int dest, boolean visited[]) {
-        if (src == dest) {
-            return true;
-        }
-        visited[src] = true;
-        for (int i = 0; i < graph[src].size(); i++) {
-            Edge e = graph[src].get(i);
-            if (!visited[e.dest] && hasPath(graph, e.dest, dest, visited)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static void DFSUtil(ArrayList<Edge>[] graph, int curr, boolean visited[]) {
         visited[curr] = true;
         for (int i = 0; i < graph[curr].size(); i++) {
@@ -56,6 +42,5 @@ class Solution {
         boolean visited[] = new boolean[n];
         DFSUtil(graph, source, visited);
         return visited[destination];
-        // return hasPath(graph, source, destination, visited);
     }
 }
