@@ -37,6 +37,16 @@ class Solution {
         return false;
     }
 
+    public static void DFSUtil(ArrayList<Edge>[] graph, int curr, boolean visited[]) {
+        visited[curr] = true;
+        for (int i = 0; i < graph[curr].size(); i++) {
+            Edge e = graph[curr].get(i);
+            if (!visited[e.dest]) {
+                DFSUtil(graph, e.dest, visited);
+            }
+        }
+    }
+
     public boolean validPath(int n, int[][] edges, int source, int destination) {
         ArrayList<Edge>[] graph = createGraph(n);
         for (int i = 0; i < edges.length; i++) {
@@ -44,6 +54,8 @@ class Solution {
             addEdge(graph, edges[i][1], edges[i][0], 0);
         }
         boolean visited[] = new boolean[n];
-        return hasPath(graph, source, destination, visited);
+        DFSUtil(graph, source, visited);
+        return visited[destination];
+        // return hasPath(graph, source, destination, visited);
     }
 }
