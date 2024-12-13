@@ -69,16 +69,9 @@ class Solution {
     public static int countPrimeSetBits(int left, int right) {
         int count = 0;
         for (int i = left; i <= right; i++) {
-            BigInteger binary = decimalToBinary(i);
-            int ones = noOfOnes(binary);
-            if (isPrime(ones)) {
-                // System.out.print("if | ");
+            if (isPrime(noOfOnes(decimalToBinary(i)))) {
                 count++;
-                System.out.println("i: "+i+" |  binary: "+binary+" | ones: "+ones+" | count: " + count);
             }
-            // if (isPrime(noOfOnes(decimalToBinary(i)))) {
-            //     count++;
-            // }
         }
         return count;
     }
