@@ -44,7 +44,6 @@ class Solution {
         }
         List<List<Integer>> last = generate(numRows-1);
         li.add(1);
-        System.out.println(last.size());
         List<Integer> l = last.get(last.size()-1);
         for (int i = 1; i < l.size(); i++) {
             li.add(l.get(i-1) + l.get(i));
