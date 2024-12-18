@@ -28,8 +28,6 @@ class Solution {
         for (int i = 0; i < n; i++) {
             char ch = s.charAt(i);
             int index = isPresent(t, ch);
-            System.out.print("ch: "+ch+" | index: "+index+" | ");
-            System.out.print(index + " != " + -1 + ": " + (index != -1) + " | ");
             if (index != -1) {
                 if (index != t.length()-1) {
                     t = t.substring(index+1);
