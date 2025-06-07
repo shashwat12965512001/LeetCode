@@ -18,13 +18,13 @@ class Solution {
 
     public int maxSubArray(int[] nums) {
         if (allNegatives(nums)) {
-            return getHighestNegative(nums);
+        return getHighestNegative(nums);
         }
         int maxSum, currSum;
         maxSum = currSum = 0;
         for (int i : nums) {
-            currSum = (currSum + i) > 0 ? (currSum + i) : 0;
-            maxSum = Math.max(maxSum, currSum);
+        currSum = (currSum + i) > 0 ? (currSum + i) : 0;
+        maxSum = Math.max(maxSum, currSum);
         }
         return maxSum;
     }
