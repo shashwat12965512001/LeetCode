@@ -5,7 +5,6 @@ class Solution {
         int end = n - 1;
         while (start <= end) {
             int mid = (start + end) / 2;
-            System.out.print("nums[" + mid + "]: " + nums[mid] + " | ");
             if (nums[mid] == target) {
                 return mid;
             } else if (target > nums[mid]) {
