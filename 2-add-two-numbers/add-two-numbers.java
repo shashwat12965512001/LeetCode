@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -10,46 +11,31 @@ import java.math.BigInteger;
  * }
  */
 class Solution {
+    public static BigInteger listToNum(ListNode li) {
+        StringBuilder sb = new StringBuilder();
+        while (li != null) {
+            sb.append(li.val);
+            li = li.next;
+        }
+        BigInteger num = new BigInteger(sb.reverse().toString());
+        return num;
+    }
 
-	public static BigInteger getNumByList(ListNode li){
-		StringBuilder str = new StringBuilder("");
-		while (li.next != null) {
-			str.append(li.val);
-			li = li.next;
-		}
-		str.append(li.val);
-        str = str.reverse();
-		return new BigInteger(str.toString());
-	}
-
-	public static ListNode createNode(int val){
-		ListNode newNode = new ListNode();
-		newNode.val = val;
-		newNode.next = null;
-		return newNode;
-	}
-
-	public static ListNode addFirst(ListNode li, int val) {
-		if (li == null) {
-			return createNode(val);
-		}
-		ListNode temp = new ListNode();
-		temp.val = val;
-		temp.next = li;
-		return temp;
-	}
-
-	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        BigInteger num1 = getNumByList(l1);
-        BigInteger num2 = getNumByList(l2);
-		String sum = String.valueOf(num1.add(num2));
-        System.out.println(num1);
-		System.out.println(num2);
-		System.out.println(sum);
-		ListNode result = null;
-		for (int i = 0; i < sum.length(); i++) {
-			result = addFirst(result, Integer.parseInt(String.valueOf(sum.charAt(i))));
-		}
-		return result;
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        BigInteger num1 = listToNum(l1);
+        BigInteger num2 = listToNum(l2);
+        num1 = num1.add(num2);
+        ListNode head = new ListNode();
+        ListNode result = new ListNode();
+        head = result;
+        while (!num1.equals(BigInteger.ZERO)) {
+            result.val = Integer.parseInt(String.valueOf(num1.mod(BigInteger.TEN)));
+            num1 = num1.divide(BigInteger.TEN);
+            if (!num1.equals(BigInteger.ZERO)) {
+                result.next = new ListNode();
+                result = result.next;
+            }
+        }
+        return head;
     }
 }
