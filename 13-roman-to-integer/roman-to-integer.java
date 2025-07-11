@@ -1,6 +1,5 @@
 class Solution {
-    public static int romanToInt(String s) {
-        int len = s.length();
+    public static int getVal(char ch) {
         HashMap<Character, Integer> map = new HashMap<>();
         map.put('I', 1);
         map.put('V', 5);
@@ -9,28 +8,53 @@ class Solution {
         map.put('C', 100);
         map.put('D', 500);
         map.put('M', 1000);
+        return map.get(ch);
+    }
 
-        // Edge Cases
-        if (len == 1) {
-            return map.get(s.charAt(0));
+    public static int baseVal(int val) {
+        if (val <= 10) {
+            return 10;
+        } else if (val <= 100) {
+            return 100;
         }
+        return 1000;
+    }
+
+    public static int convert(String str) {
+        int n = str.length();
         int num = 0;
-        for (int i = len-1; i >= 0; i--) {
-            char ch = s.charAt(i);
-            int val = map.get(ch);
-            while (i >= 1 && val <= map.get(s.charAt(i-1))) {
+        int last = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            char ch = str.charAt(i);
+            int val = getVal(ch);
+            if (last > val) {
+                num -= val;
+            } else {
                 num += val;
-                val = map.get(s.charAt(i-1));
-                i--;
             }
-            if (i == 0) {
-                num += map.get(s.charAt(0));
-                return num;
-            }
-            num += val - map.get(s.charAt(i-1));
-            i--;
+            last = val;
         }
+        return num;
+    }
 
+    public static int romanToInt(String s) {
+        int n = s.length();
+        int num = 0;
+        int i = n - 1;
+        while (i >= 0) {
+            char ch = s.charAt(i);
+            int val = getVal(ch);
+            int base = baseVal(val);
+            StringBuilder sb = new StringBuilder();
+            while (val <= base) {
+                sb.append(s.charAt(i));
+                i--;
+                if (i < 0) {
+                    break;
+                }
+            }
+            num += convert(sb.reverse().toString());
+        }
         return num;
     }
 }
