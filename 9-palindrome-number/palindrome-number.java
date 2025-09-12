@@ -10,8 +10,6 @@ class Solution {
             rev += num % 10;
             num /= 10;
         }
-        System.out.println(rev);
-        System.out.println(x);
         return rev == x;
     }
 }
