@@ -1,16 +1,17 @@
 class Solution {
-    public static boolean isPalindrome(int x) {
+    public boolean isPalindrome(int x) {
         if (x < 0) {
             return false;
         }
-        int rev = x;
-        int last = 0;
-        int num = 0;
-        while (rev != 0) {
-            last = rev % 10;
-            rev = rev/10;
-            num = (num * 10) + last;
+        int num = x;
+        int rev = 0;
+        while (num > 0) {
+            rev *= 10;
+            rev += num % 10;
+            num /= 10;
         }
-        return num == x;
+        System.out.println(rev);
+        System.out.println(x);
+        return rev == x;
     }
 }
